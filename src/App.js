@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import Chat from './components/Chat';
+import ListUsers from './components/listUsers';
+import { dataUsers } from './dataUsers/dataUsers';
+import { addUsers } from './store/reduxUsers';
+
 
 function App() {
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.reduxUsers.users)
+  const id = useSelector(state => state.reduxUsers.id)
+  useEffect(() => {
+    let localUsers = (JSON.parse(localStorage.getItem('dataUsers')) !== null)
+      ?
+      (JSON.parse(localStorage.getItem('dataUsers')))
+      :
+      dataUsers;
+    console.log((JSON.parse(localStorage.getItem('dataUsers'))) === null)
+    dispatch(addUsers(localUsers))
+  }, [])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='fon'>
+      <ListUsers />
+      {id !== null &&
+        < Chat />}
     </div>
   );
 }
