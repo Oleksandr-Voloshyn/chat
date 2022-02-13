@@ -18,7 +18,6 @@ function App() {
       (JSON.parse(localStorage.getItem('dataUsers')))
       :
       dataUsers;
-    console.log((JSON.parse(localStorage.getItem('dataUsers'))) === null)
     dispatch(addUsers(localUsers))
   }, [])
 

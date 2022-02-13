@@ -18,7 +18,6 @@ const Chat = () => {
 
     useEffect(() => {
         localStorage.setItem('dataUsers', JSON.stringify(users))
-        console.log(JSON.parse(localStorage.getItem('dataUsers')))
     }, [users[userId - 1].messages.length])
 
     useEffect(() => {
